@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Lesson1</title>
+<style>
+:root{--card:#fff;--text:#1f2937;--sub:#4b5563;--accent:#2563eb;--accent2:#f59e0b;--border:#dbeafe}
+*{box-sizing:border-box} body{margin:0;font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;background:linear-gradient(180deg,#eef7ff,#f9fcff);color:var(--text);line-height:1.8}
+.wrap{max-width:960px;margin:0 auto;padding:20px}.hero,.card{background:var(--card);border:3px solid var(--border);border-radius:24px;padding:24px;box-shadow:0 10px 25px rgba(37,99,235,.08);margin-bottom:20px}
+h1,h2{margin-top:0;line-height:1.4} h1{font-size:2rem;color:var(--accent)} .tag{display:inline-block;background:#dbeafe;color:var(--accent);border-radius:999px;padding:4px 10px;font-weight:bold;margin-bottom:10px}
+.demo-box{border:3px dashed #93c5fd;border-radius:20px;padding:20px;text-align:center;background:#eff6ff} #messageBox{font-size:1.8rem;font-weight:bold;margin:18px 0;min-height:3em;display:flex;align-items:center;justify-content:center;background:#fff;border-radius:18px;padding:18px;border:2px solid #bfdbfe}
+button,a{border:none;border-radius:999px;padding:14px 22px;font-size:1rem;font-weight:bold;cursor:pointer;margin:8px;text-decoration:none;display:inline-block}.primary{background:var(--accent);color:#fff}.secondary{background:var(--accent2);color:#fff}.nav{background:#111827;color:#fff}
+pre{background:#0f172a;color:#e5f0ff;padding:18px;border-radius:18px;overflow:auto;white-space:pre-wrap}
+</style></head>
+<body><div class="wrap">
+<section class="hero"><div class="tag">Lesson 1</div><h1>文字を出してみよう！</h1><p>ボタンを押したら画面に文字を出すプログラムを体験します。</p></section>
+<section class="card"><h2>やってみよう</h2><div class="demo-box"><div id="messageBox">ここにメッセージが出るよ</div><button class="primary" onclick="showMessage()">メッセージを出す</button><button class="secondary" onclick="resetMessage()">もとにもどす</button></div></section>
+<section class="card"><h2>コード</h2><pre>function showMessage() {
+  document.getElementById("messageBox").textContent = "こんにちは！";
+}</pre></section>
+<section class="card"><a class="nav" href="index.html">トップにもどる</a><a class="nav" href="lesson2.html">Lesson2へ</a></section>
+</div>
+<script>
+function showMessage(){document.getElementById("messageBox").textContent="こんにちは！プログラミングはたのしいね！";}
+function resetMessage(){document.getElementById("messageBox").textContent="ここにメッセージが出るよ";}
+</script></body></html>

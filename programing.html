@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>こどもプログラミング教室</title>
+  <style>
+    :root{
+      --card:#fff; --text:#1f2937; --sub:#4b5563; --accent:#2563eb; --border:#dbeafe;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;background:linear-gradient(180deg,#eef7ff,#f9fcff);color:var(--text);line-height:1.8}
+    .wrap{max-width:1000px;margin:0 auto;padding:20px}
+    .hero,.card{background:var(--card);border:3px solid var(--border);border-radius:24px;padding:24px;box-shadow:0 10px 25px rgba(37,99,235,.08)}
+    .hero{margin-bottom:20px}
+    h1,h2,h3{margin-top:0;line-height:1.4}
+    h1{font-size:2rem;color:var(--accent)}
+    .lead{color:var(--sub)}
+    .grid,.lessons{display:grid;gap:18px}
+    .grid{grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+    .lessons{grid-template-columns:repeat(auto-fit,minmax(280px,1fr));margin-top:18px}
+    .tag{display:inline-block;background:#dbeafe;color:var(--accent);padding:4px 10px;border-radius:999px;font-weight:bold}
+    .lesson-card{background:#fff;border:3px solid var(--border);border-radius:22px;padding:20px;box-shadow:0 8px 20px rgba(0,0,0,.04)}
+    .btn{display:inline-block;text-decoration:none;background:var(--accent);color:#fff;padding:12px 18px;border-radius:999px;font-weight:bold;margin-top:10px}
+    .soon{background:#fff7ed;border-color:#fdba74}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="tag">Webで学ぶ</div>
+      <h1>こどもプログラミング教室</h1>
+      <p class="lead">ブラウザだけで学べる、はじめてのプログラミングサイトです。小さな成功体験を積みながら、最後はマリオ風ゲーム作りを目指します。</p>
+    </section>
+
+    <section class="card">
+      <h2>このサイトで学べること</h2>
+      <div class="grid">
+        <div><h3>① まずは動かす</h3><p>文字を出す、色を変える、キャラを動かす。まずは「楽しい」を体験します。</p></div>
+        <div><h3>② 少しずつ考える</h3><p>変数、条件分岐、くり返しをやさしく学びます。</p></div>
+        <div><h3>③ ゲームに近づく</h3><p>ジャンプ、当たり判定、ゴール判定へ進んでいきます。</p></div>
+      </div>
+    </section>
+
+    <section class="lessons">
+      <article class="lesson-card"><div class="tag">Lesson 1</div><h3>文字を出してみよう</h3><p>ボタンを押したら画面にメッセージを表示します。</p><a class="btn" href="lesson1.html">はじめる</a></article>
+      <article class="lesson-card"><div class="tag">Lesson 2</div><h3>色を変えてみよう</h3><p>ボタンを押して、背景やメッセージの色を変えます。</p><a class="btn" href="lesson2.html">はじめる</a></article>
+      <article class="lesson-card"><div class="tag">Lesson 3</div><h3>キャラクターを動かそう</h3><p>矢印ボタンを押して、キャラクターを上下左右に動かします。</p><a class="btn" href="lesson3.html">はじめる</a></article>
+      <article class="lesson-card"><div class="tag">Lesson 4</div><h3>数字を覚えよう</h3><p>へんすうを使って、ポイントやスコアを増やします。</p><a class="btn" href="lesson4.html">はじめる</a></article>
+      <article class="lesson-card soon"><div class="tag">このあと</div><h3>これから作るレッスン</h3><ul><li>Lesson 7以降: ジャンプ、敵、ゴール</li><li>Lesson 7以降: ジャンプ、敵、ゴール</li><li>Lesson 7以降: ジャンプ、敵、ゴール</li><li>Lesson 7以降: ジャンプ、敵、ゴール</li></ul></article>
+    </section>
+  </div>
+</body>
+</html>

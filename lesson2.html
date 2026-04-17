@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="ja"><head><meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" /><title>Lesson2</title>
+<style>
+:root{--card:#fff;--text:#1f2937;--accent:#2563eb;--border:#dbeafe}
+*{box-sizing:border-box} body{margin:0;font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;background:linear-gradient(180deg,#eef7ff,#f9fcff);color:var(--text);line-height:1.8;transition:background .3s ease}
+.wrap{max-width:960px;margin:0 auto;padding:20px}.hero,.card{background:var(--card);border:3px solid var(--border);border-radius:24px;padding:24px;box-shadow:0 10px 25px rgba(37,99,235,.08);margin-bottom:20px}
+h1,h2{margin-top:0} h1{font-size:2rem;color:var(--accent)} .tag{display:inline-block;background:#dbeafe;color:var(--accent);border-radius:999px;padding:4px 10px;font-weight:bold;margin-bottom:10px}
+.demo-box{border:3px dashed #93c5fd;border-radius:20px;padding:20px;text-align:center;background:#eff6ff} #message{font-size:1.8rem;font-weight:bold;min-height:3em;background:#fff;border:2px solid #bfdbfe;border-radius:18px;display:flex;align-items:center;justify-content:center;padding:18px;margin:18px 0}
+button,a{border:none;border-radius:999px;padding:14px 22px;font-size:1rem;font-weight:bold;cursor:pointer;margin:8px;color:#fff;text-decoration:none;display:inline-block}.blue{background:#2563eb}.yellow{background:#f59e0b}.green{background:#16a34a}.reset{background:#111827}
+</style></head>
+<body><div class="wrap">
+<section class="hero"><div class="tag">Lesson 2</div><h1>色を変えてみよう！</h1><p>ボタンを押して、画面やメッセージの色を変えてみよう。</p></section>
+<section class="card"><h2>やってみよう</h2><div class="demo-box"><div id="message">どの色にする？</div><button class="blue" onclick="setTheme('#dbeafe','あおに かわったよ！')">あお</button><button class="yellow" onclick="setTheme('#fef3c7','きいろに かわったよ！')">きいろ</button><button class="green" onclick="setTheme('#dcfce7','みどりに かわったよ！')">みどり</button><button class="reset" onclick="resetTheme()">もとにもどす</button></div></section>
+<section class="card"><a class="reset" href="index.html">トップにもどる</a><a class="reset" href="lesson3.html">Lesson3へ</a></section>
+</div>
+<script>
+function setTheme(color,text){document.body.style.background=color;document.getElementById("message").textContent=text;}
+function resetTheme(){document.body.style.background="linear-gradient(180deg,#eef7ff,#f9fcff)";document.getElementById("message").textContent="どの色にする？";}
+</script></body></html>

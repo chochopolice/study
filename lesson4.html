@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lesson4 数字を覚えよう（変数）</title>
+  <style>
+    :root{
+      --card:#fff; --text:#1f2937; --sub:#4b5563; --accent:#2563eb;
+      --border:#dbeafe; --accent2:#f59e0b; --ok:#16a34a;
+    }
+    *{box-sizing:border-box}
+    body{
+      margin:0;
+      font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;
+      background:linear-gradient(180deg,#eef7ff,#f9fcff);
+      color:var(--text);
+      line-height:1.8;
+    }
+    .wrap{max-width:980px;margin:0 auto;padding:20px}
+    .hero,.card{
+      background:var(--card);
+      border:3px solid var(--border);
+      border-radius:24px;
+      padding:24px;
+      box-shadow:0 10px 25px rgba(37,99,235,.08);
+      margin-bottom:20px;
+    }
+    h1,h2,h3{margin-top:0;line-height:1.4}
+    h1{font-size:2rem;color:var(--accent)}
+    .lead{color:var(--sub)}
+    .tag{
+      display:inline-block;background:#dbeafe;color:var(--accent);
+      border-radius:999px;padding:4px 10px;font-weight:bold;margin-bottom:10px;
+    }
+    .grid{
+      display:grid;
+      grid-template-columns:repeat(auto-fit,minmax(280px,1fr));
+      gap:18px;
+    }
+    .demo-box{
+      border:3px dashed #93c5fd;
+      border-radius:20px;
+      padding:20px;
+      text-align:center;
+      background:#eff6ff;
+    }
+    .counter{
+      font-size:3rem;
+      font-weight:bold;
+      background:#fff;
+      border:2px solid #bfdbfe;
+      border-radius:20px;
+      padding:16px;
+      margin:16px auto;
+      max-width:320px;
+    }
+    .status{
+      background:#f0fdf4;
+      border-left:6px solid var(--ok);
+      border-radius:12px;
+      padding:14px 16px;
+      margin:10px 0;
+    }
+    button,a{
+      border:none;
+      border-radius:999px;
+      padding:14px 22px;
+      font-size:1rem;
+      font-weight:bold;
+      cursor:pointer;
+      margin:8px;
+      text-decoration:none;
+      display:inline-block;
+      color:#fff;
+    }
+    .primary{background:var(--accent)}
+    .secondary{background:var(--accent2)}
+    .dark{background:#111827}
+    pre{
+      background:#0f172a;
+      color:#e5f0ff;
+      padding:18px;
+      border-radius:18px;
+      overflow:auto;
+      white-space:pre-wrap;
+      word-break:break-word;
+    }
+    .mission{
+      background:#fff7ed;
+      border:3px solid #fdba74;
+      border-radius:20px;
+      padding:18px;
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <section class="hero">
+      <div class="tag">Lesson 4</div>
+      <h1>数字を覚えよう！<br>へんすうってなに？</h1>
+      <p class="lead">
+        へんすうは、数字や言葉を入れておける「箱」です。<br>
+        今回は、ボタンを押すたびに数字がふえるしくみを作ってみよう！
+      </p>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>きょう やること</h2>
+        <p>数字を覚える箱を作って、ボタンを押したら数が増えるようにします。</p>
+        <div class="status">
+          <strong>へんすう</strong> = データを入れておける名前つきの箱
+        </div>
+      </div>
+
+      <div class="card">
+        <h2>できるようになること</h2>
+        <ul>
+          <li>数字をしまっておく</li>
+          <li>数字を 1 ずつ増やす</li>
+          <li>ゲームの「スコア」の基本を知る</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>やってみよう</h2>
+      <div class="demo-box">
+        <p>いまのポイント</p>
+        <div class="counter" id="scoreBox">0</div>
+        <button class="primary" onclick="addPoint()">+1 する</button>
+        <button class="secondary" onclick="addFive()">+5 する</button>
+        <button class="dark" onclick="resetScore()">0にもどす</button>
+        <p id="message">ボタンを押してみよう！</p>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>コードを見てみよう</h2>
+      <pre>let score = 0;
+
+function addPoint() {
+  score = score + 1;
+  document.getElementById("scoreBox").textContent = score;
+}</pre>
+      <div class="status">
+        <strong>score</strong> という名前の箱に、数字を入れています。
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>ことばの意味</h2>
+        <div class="status"><strong>let</strong>：新しい箱を作る合図</div>
+        <div class="status"><strong>score</strong>：箱の名前</div>
+        <div class="status"><strong>=</strong>：右のものを左の箱に入れる</div>
+      </div>
+
+      <div class="card">
+        <h2>どう動いているの？</h2>
+        <ol>
+          <li><strong>score = 0</strong> で、最初は 0 を入れる</li>
+          <li>ボタンを押す</li>
+          <li><strong>score = score + 1</strong> で数字をふやす</li>
+          <li>画面の数字も新しい数に変わる</li>
+        </ol>
+      </div>
+    </section>
+
+    <section class="card mission">
+      <h2>ミッション</h2>
+      <ul>
+        <li>+10 のボタンを自分で作ってみよう</li>
+        <li>score という名前を point に変えてみよう</li>
+        <li>100点になったら「すごい！」と表示してみよう</li>
+      </ul>
+    </section>
+
+    <section class="card">
+      <a class="dark" href="index.html">トップにもどる</a>
+      <a class="dark" href="lesson3.html">Lesson3へ</a>
+    </section>
+  </div>
+
+  <script>
+    let score = 0;
+
+    function updateView(text) {
+      document.getElementById("scoreBox").textContent = score;
+      document.getElementById("message").textContent = text;
+    }
+
+    function addPoint() {
+      score = score + 1;
+      updateView("1ポイント ふえたよ！");
+    }
+
+    function addFive() {
+      score = score + 5;
+      updateView("5ポイント ふえたよ！");
+    }
+
+    function resetScore() {
+      score = 0;
+      updateView("0にもどったよ！");
+    }
+  </script>
+</body>
+</html>

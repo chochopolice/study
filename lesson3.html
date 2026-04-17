@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Lesson3 キャラクターを動かそう</title>
+<style>
+:root{--card:#fff;--text:#1f2937;--sub:#4b5563;--accent:#2563eb;--border:#dbeafe}
+*{box-sizing:border-box}
+body{margin:0;font-family:"Yu Gothic","Hiragino Kaku Gothic ProN",sans-serif;background:linear-gradient(180deg,#eef7ff,#f9fcff);color:var(--text);line-height:1.8}
+.wrap{max-width:980px;margin:0 auto;padding:20px}
+.hero,.card{background:var(--card);border:3px solid var(--border);border-radius:24px;padding:24px;box-shadow:0 10px 25px rgba(37,99,235,.08);margin-bottom:20px}
+h1,h2{margin-top:0;line-height:1.4} h1{font-size:2rem;color:var(--accent)}
+.lead{color:var(--sub)} .tag{display:inline-block;background:#dbeafe;color:var(--accent);border-radius:999px;padding:4px 10px;font-weight:bold;margin-bottom:10px}
+.game-area{width:100%;max-width:560px;height:360px;margin:0 auto 18px;position:relative;border:4px solid #93c5fd;border-radius:20px;background:linear-gradient(180deg,#dbeafe 0 78%, #86efac 78% 100%);overflow:hidden}
+#player{width:52px;height:52px;position:absolute;left:30px;top:250px;border-radius:16px;background:#f59e0b;display:flex;align-items:center;justify-content:center;font-size:1.6rem;box-shadow:0 6px 14px rgba(0,0,0,.15);user-select:none}
+.controls{display:flex;flex-direction:column;align-items:center;gap:8px}.row{display:flex;gap:8px}
+button,a{border:none;border-radius:16px;padding:14px 18px;min-width:74px;font-size:1rem;font-weight:bold;cursor:pointer;background:#2563eb;color:#fff;text-decoration:none;display:inline-block}
+.dark{background:#111827}
+.status{text-align:center;font-weight:bold;background:#eff6ff;border:2px solid #bfdbfe;border-radius:16px;padding:12px;margin:12px auto;max-width:560px}
+pre{background:#0f172a;color:#e5f0ff;padding:18px;border-radius:18px;overflow:auto;white-space:pre-wrap;word-break:break-word}
+.mission{background:#fff7ed;border:3px solid #fdba74;border-radius:20px;padding:18px}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <section class="hero">
+    <div class="tag">Lesson 3</div>
+    <h1>キャラクターを動かそう！</h1>
+    <p class="lead">画面の中にいるキャラクターを上下左右に動かします。ゲーム作りの入り口になるレッスンです。</p>
+  </section>
+
+  <section class="card">
+    <h2>やってみよう</h2>
+    <div class="game-area" id="gameArea"><div id="player">🙂</div></div>
+    <div class="status" id="statusText">ボタンを押してキャラクターを動かしてみよう！</div>
+    <div class="controls">
+      <div class="row"><button onclick="movePlayer('up')">↑</button></div>
+      <div class="row"><button onclick="movePlayer('left')">←</button><button class="dark" onclick="resetPlayer()">もどす</button><button onclick="movePlayer('right')">→</button></div>
+      <div class="row"><button onclick="movePlayer('down')">↓</button></div>
+    </div>
+  </section>
+
+  <section class="card">
+    <h2>コードのポイント</h2>
+    <pre>let x = 30;
+let y = 250;
+
+function movePlayer(direction) {
+  if (direction === "right") {
+    x = x + 20;
+  }
+
+  player.style.left = x + "px";
+  player.style.top = y + "px";
+}</pre>
+    <p><strong>x</strong> は横の場所、<strong>y</strong> は縦の場所です。数字を変えると、キャラクターの場所が変わります。</p>
+  </section>
+
+  <section class="card mission">
+    <h2>ミッション</h2>
+    <ul>
+      <li>1回で動く量を20から30に変えてみよう</li>
+      <li>顔文字を🙂から🐱や🚗に変えてみよう</li>
+      <li>キーボードの矢印キーでも動かしてみよう</li>
+    </ul>
+  </section>
+
+  <section class="card">
+    <a class="dark" href="index.html">トップにもどる</a>
+    <a class="dark" href="lesson2.html">Lesson2へ</a>
+  </section>
+</div>
+
+<script>
+const player = document.getElementById("player");
+const statusText = document.getElementById("statusText");
+const area = document.getElementById("gameArea");
+
+let x = 30;
+let y = 250;
+const step = 20;
+
+function drawPlayer() {
+  player.style.left = x + "px";
+  player.style.top = y + "px";
+}
+
+function movePlayer(direction) {
+  const maxX = area.clientWidth - player.offsetWidth;
+  const maxY = area.clientHeight - player.offsetHeight;
+
+  if (direction === "left") x -= step;
+  if (direction === "right") x += step;
+  if (direction === "up") y -= step;
+  if (direction === "down") y += step;
+
+  if (x < 0) x = 0;
+  if (y < 0) y = 0;
+  if (x > maxX) x = maxX;
+  if (y > maxY) y = maxY;
+
+  drawPlayer();
+  statusText.textContent = "いまの位置: よこ " + x + " / たて " + y;
+}
+
+function resetPlayer() {
+  x = 30;
+  y = 250;
+  drawPlayer();
+  statusText.textContent = "スタート位置にもどったよ！";
+}
+
+window.addEventListener("keydown", (event) => {
+  if (event.key === "ArrowLeft") movePlayer("left");
+  if (event.key === "ArrowRight") movePlayer("right");
+  if (event.key === "ArrowUp") movePlayer("up");
+  if (event.key === "ArrowDown") movePlayer("down");
+});
+
+drawPlayer();
+</script>
+</body>
+</html>
