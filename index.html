@@ -1,0 +1,738 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>こどもパソコン教室</title>
+  <style>
+    :root {
+      --bg: #f6fbff;
+      --card: #ffffff;
+      --line: #d9e7f2;
+      --text: #1f2d3d;
+      --sub: #5e7388;
+      --blue: #4da3ff;
+      --blue-dark: #2c7ed6;
+      --yellow: #ffd85e;
+      --green: #7bd88f;
+      --pink: #ff9dc5;
+      --shadow: 0 10px 24px rgba(42, 94, 140, 0.12);
+      --radius: 22px;
+    }
+
+    * { box-sizing: border-box; }
+
+    body {
+      margin: 0;
+      font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", sans-serif;
+      color: var(--text);
+      background: linear-gradient(180deg, #eef8ff 0%, #f8fcff 100%);
+    }
+
+    .app {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+    }
+
+    header {
+      background: linear-gradient(135deg, #88c8ff, #b5e3ff);
+      border-radius: 28px;
+      padding: 28px;
+      box-shadow: var(--shadow);
+      display: grid;
+      grid-template-columns: 1.5fr 1fr;
+      gap: 20px;
+      align-items: center;
+    }
+
+    .hero-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 800;
+      margin: 0 0 12px;
+      line-height: 1.2;
+    }
+
+    .hero-text {
+      font-size: 16px;
+      line-height: 1.8;
+      margin: 0 0 18px;
+    }
+
+    .hero-box {
+      background: rgba(255,255,255,0.7);
+      border-radius: 24px;
+      padding: 20px;
+      border: 2px solid rgba(255,255,255,0.7);
+    }
+
+    .hero-illust {
+      background: linear-gradient(180deg, #ffffff, #eef8ff);
+      border-radius: 24px;
+      min-height: 220px;
+      display: grid;
+      place-items: center;
+      padding: 18px;
+      border: 2px dashed #9fd0ff;
+    }
+
+    .hero-emoji {
+      font-size: clamp(60px, 10vw, 110px);
+      letter-spacing: 6px;
+    }
+
+    .button-row {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    button {
+      border: none;
+      border-radius: 999px;
+      padding: 12px 18px;
+      font-size: 15px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: .2s ease;
+    }
+
+    button:hover { transform: translateY(-1px); }
+
+    .primary {
+      background: var(--blue);
+      color: white;
+      box-shadow: 0 8px 18px rgba(77, 163, 255, 0.35);
+    }
+
+    .secondary {
+      background: white;
+      color: var(--blue-dark);
+      border: 2px solid #bfe0ff;
+    }
+
+    nav {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .nav-btn {
+      background: white;
+      border: 2px solid var(--line);
+      color: var(--text);
+      padding: 14px;
+      border-radius: 18px;
+      font-weight: 700;
+    }
+
+    .nav-btn.active {
+      background: #eaf5ff;
+      border-color: #98cfff;
+    }
+
+    .layout {
+      display: grid;
+      grid-template-columns: 320px 1fr;
+      gap: 20px;
+      margin-top: 20px;
+    }
+
+    .panel, .content {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+    }
+
+    .panel {
+      padding: 18px;
+      position: sticky;
+      top: 20px;
+      height: fit-content;
+    }
+
+    .content {
+      padding: 24px;
+      min-height: 700px;
+    }
+
+    .progress-card {
+      background: #f5fbff;
+      border: 1px solid #d8ebff;
+      border-radius: 18px;
+      padding: 16px;
+      margin-bottom: 18px;
+    }
+
+    .progress-bar {
+      height: 14px;
+      background: #e2effb;
+      border-radius: 999px;
+      overflow: hidden;
+      margin-top: 10px;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #66b5ff, #7bd88f);
+      width: 0%;
+      transition: width .25s ease;
+      border-radius: 999px;
+    }
+
+    .step-list {
+      display: grid;
+      gap: 12px;
+    }
+
+    .step-card {
+      border: 1px solid var(--line);
+      border-radius: 18px;
+      padding: 14px;
+      background: #fff;
+    }
+
+    .step-title {
+      font-size: 15px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .lesson-list {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .lesson-btn {
+      width: 100%;
+      text-align: left;
+      background: #f9fcff;
+      border: 1px solid #dbeaf8;
+      color: var(--text);
+      border-radius: 14px;
+      padding: 10px 12px;
+      font-size: 14px;
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+    }
+
+    .lesson-btn.done {
+      background: #effcf2;
+      border-color: #bde9c6;
+    }
+
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 24px;
+      height: 24px;
+      border-radius: 999px;
+      background: #e8f4ff;
+      color: #2673c9;
+      font-size: 12px;
+      font-weight: 800;
+      padding: 0 8px;
+    }
+
+    .done .badge {
+      background: #dff7e5;
+      color: #1d8a39;
+    }
+
+    .welcome-grid,
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px;
+    }
+
+    .mini-card {
+      background: #f9fcff;
+      border: 1px solid #dceaf7;
+      border-radius: 18px;
+      padding: 18px;
+    }
+
+    .lesson-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 16px;
+    }
+
+    .pill {
+      display: inline-block;
+      background: #eef7ff;
+      color: #2f7cd2;
+      padding: 8px 12px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    h1, h2, h3 { line-height: 1.4; }
+    h2 { font-size: clamp(24px, 3vw, 34px); margin: 0; }
+    h3 { margin-top: 24px; font-size: 20px; }
+    p, li { line-height: 1.9; }
+
+    .section-box {
+      background: #fbfdff;
+      border: 1px solid #e1edf8;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 16px;
+    }
+
+    .quiz-box {
+      background: #fffaf0;
+      border: 1px solid #ffe3a4;
+      border-radius: 18px;
+      padding: 18px;
+      margin-top: 18px;
+    }
+
+    .quiz-answer {
+      display: none;
+      margin-top: 12px;
+      background: #fff;
+      border-radius: 14px;
+      padding: 12px;
+      border: 1px dashed #f0c45b;
+    }
+
+    .quiz-answer.show { display: block; }
+
+    .nav-bottom {
+      margin-top: 26px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .footer-note {
+      margin-top: 18px;
+      color: var(--sub);
+      font-size: 13px;
+    }
+
+    @media (max-width: 920px) {
+      header,
+      .layout,
+      .welcome-grid,
+      .cards-grid {
+        grid-template-columns: 1fr;
+      }
+
+      nav {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .panel {
+        position: static;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .app { padding: 14px; }
+      header, .content, .panel { padding: 16px; }
+      nav { grid-template-columns: 1fr 1fr; }
+      .lesson-head { flex-direction: column; }
+      .nav-bottom { flex-direction: column; }
+      .nav-bottom button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+  <div class="app">
+    <header>
+      <div class="hero-box">
+        <h1 class="hero-title">こどもパソコン教室</h1>
+        <p class="hero-text">
+          パソコンのひらき方、キーボード入力、フォルダ、ブラウザ、ショートカットキー、
+          インターネットの安全な使い方まで、1ページずつ楽しく学べるサイトです。
+        </p>
+        <div class="button-row">
+          <button class="primary" onclick="goHome()">はじめる</button>
+          <button class="secondary" onclick="openFirstLesson()">最初のレッスンへ</button>
+          <button class="secondary" onclick="resetProgress()">進みぐあいをリセット</button>
+        </div>
+      </div>
+      <div class="hero-illust">
+        <div class="hero-emoji">💻⌨️🖱️</div>
+      </div>
+    </header>
+
+    <nav>
+      <button class="nav-btn active" id="tab-home" onclick="showHome()">トップ</button>
+      <button class="nav-btn" id="tab-steps" onclick="showStepList()">ステップ一覧</button>
+      <button class="nav-btn" id="tab-lesson" onclick="showCurrentLesson()">学習ページ</button>
+      <button class="nav-btn" id="tab-parent" onclick="showParentPage()">保護者向け</button>
+    </nav>
+
+    <div class="layout">
+      <aside class="panel">
+        <div class="progress-card">
+          <div><strong>進みぐあい</strong></div>
+          <div id="progressText">0 / 49 ページ</div>
+          <div class="progress-bar"><div class="progress-fill" id="progressFill"></div></div>
+        </div>
+
+        <div class="step-list" id="stepList"></div>
+      </aside>
+
+      <main class="content" id="content"></main>
+    </div>
+  </div>
+
+  <script>
+    const steps = [
+      {
+        id: 0,
+        title: 'ステップ0 はじめてのパソコン',
+        color: '#ffd85e',
+        lessons: [
+          { id: 1, title: 'パソコンってなに？', learn: ['パソコンがどんなものかわかる', 'パソコンでできることを知る'], text: 'パソコンは、文字を書いたり、絵を描いたり、調べものをしたりできる機械です。学校の勉強にも、おうちでの調べものにも使えます。ゲームや動画だけでなく、発表の資料を作るときにも役立ちます。', tryList: ['パソコンでできそうなことを3つ考えよう', '学校や家で見たことがある使い方を話してみよう'], quiz: 'パソコンでできることはどれ？', choices: ['A. 文字を書く', 'B. 絵を描く', 'C. 調べものをする', 'D. ぜんぶ'], answer: '答え：D', summary: 'パソコンは、勉強にも生活にも使える便利な道具です。' },
+          { id: 2, title: 'パソコンでできること', learn: ['パソコンのいろいろな使い道を知る'], text: 'パソコンでは、文章を書く、写真を見る、動画を見る、音を聞く、調べものをする、オンラインで学ぶ、発表の資料を作る、プログラミングを学ぶ、などたくさんのことができます。', tryList: ['「勉強」「遊び」「家の人のお手伝い」に分けて使い道を書こう'], quiz: 'パソコンは何のために使える？', choices: ['A. 勉強', 'B. 作品づくり', 'C. 調べもの', 'D. ぜんぶ'], answer: '答え：D', summary: 'パソコンは、いろいろなことに使える道具です。' },
+          { id: 3, title: 'パソコンの各部分の名前', learn: ['パソコンの主な部分の名前を知る'], text: 'パソコンには、画面、キーボード、マウス、電源ボタン、スピーカーなどがあります。ノートパソコンは、画面とキーボードがつながっています。デスクトップパソコンは、本体と画面が別になっていることがあります。', tryList: ['自分のパソコンの画面、キーボード、電源ボタンを見つけよう'], quiz: '文字を打つ場所はどこ？', choices: ['A. キーボード', 'B. スピーカー', 'C. 画面のふち'], answer: '答え：A', summary: 'まずは、パソコンの部分の名前を覚えることが大切です。' },
+          { id: 4, title: '電源の入れ方・切り方', learn: ['正しく電源を入れる方法', '正しく電源を切る方法'], text: 'パソコンを使うときは、電源ボタンを押して起動します。使い終わったら、いきなりコンセントを抜いたり、急に電源を切ったりしません。画面のメニューから正しくシャットダウンします。', tryList: ['電源ボタンを見つけよう', '大人といっしょに電源を入れよう', '正しい方法で電源を切ろう'], quiz: 'パソコンの正しい切り方は？', choices: ['A. コンセントを抜く', 'B. 画面からシャットダウンする', 'C. たたく'], answer: '答え：B', summary: 'パソコンは、正しい手順で使うことが大切です。' },
+          { id: 5, title: 'マウスの使い方', learn: ['マウスでできる基本操作を知る'], text: 'マウスは、画面の矢印を動かすための道具です。主によく使うのは、クリック、ダブルクリック、右クリックです。クリックは選ぶ、ダブルクリックは開く、右クリックはメニューを出す、と覚えるとわかりやすいです。', tryList: ['画面のアイコンを1回クリックしよう', 'つぎにダブルクリックしてみよう'], quiz: 'アイコンを開くことが多い操作は？', choices: ['A. ダブルクリック', 'B. 右クリック', 'C. 長押しだけ'], answer: '答え：A', summary: 'マウスを上手に使えると、パソコン操作がしやすくなります。' },
+          { id: 6, title: 'キーボードの使い方', learn: ['キーボードの役目を知る', 'よく使うキーを覚える'], text: 'キーボードは、文字や数字を入力するための道具です。よく使うキーは、スペースキー、エンターキー、バックスペースキーです。スペースは空白、エンターは決定、バックスペースは前の文字を消すときに使います。', tryList: ['自分の名前を入力しよう', 'スペースを入れよう', 'バックスペースで1文字消そう'], quiz: 'まちがえた文字を消すキーは？', choices: ['A. エンター', 'B. バックスペース', 'C. シフト'], answer: '答え：B', summary: 'キーボードには、それぞれ役目のあるキーがあります。' }
+        ]
+      },
+      {
+        id: 1,
+        title: 'ステップ1 文字を入力してみよう',
+        color: '#ff9dc5',
+        lessons: [
+          { id: 7, title: 'ひらがなを入力しよう', learn: ['ひらがなの入力に慣れる'], text: 'パソコンでは、キーボードでローマ字を入力して、ひらがなにすることが多いです。たとえば、「あ」は a、「か」は ka、「さ」は sa です。最初はゆっくりで大丈夫です。', tryList: ['あいうえお を入力しよう', '自分の名前をひらがなで入力しよう'], quiz: '「か」はどう打つ？', choices: ['A. ka', 'B. ki', 'C. ku'], answer: '答え：A', summary: 'ひらがな入力は、パソコン文字入力の第一歩です。' },
+          { id: 8, title: 'カタカナを入力しよう', learn: ['カタカナ入力のやり方を知る'], text: 'カタカナは、ひらがなで入力してから変換して作ることができます。たとえば「ぱそこん」と入力して、変換すると「パソコン」になります。', tryList: ['「ゲーム」「ノート」「パソコン」を入力して変換しよう'], quiz: 'カタカナはどうやって作ることが多い？', choices: ['A. ひらがな入力して変換', 'B. マウスだけ', 'C. 電源ボタン'], answer: '答え：A', summary: 'カタカナも、ひらがなから変換して入力できます。' },
+          { id: 9, title: '漢字に変換しよう', learn: ['変換の基本を知る'], text: '文字を入力したあと、スペースキーを押すと、漢字やカタカナへの変換候補が出ます。合う言葉を選んで、エンターキーで決めます。', tryList: ['「がっこう」を入力して「学校」にしよう', '「せんせい」を入力して「先生」にしよう'], quiz: '変換候補を出すことが多いキーは？', choices: ['A. スペースキー', 'B. エスケープキー', 'C. シフトキー'], answer: '答え：A', summary: '入力した文字は、変換すると見やすい文章になります。' },
+          { id: 10, title: '数字と記号を入力しよう', learn: ['数字とよく使う記号を入力する'], text: 'キーボードでは、数字や記号も入力できます。たとえば、1 2 3 や、！、？、。、・ などです。作文やメモを書くときに役立ちます。', tryList: ['12345 を入力しよう', '！と？を入力しよう'], quiz: '数字はどこで入力できる？', choices: ['A. キーボード', 'B. マウスの裏', 'C. 机の上'], answer: '答え：A', summary: '数字や記号も、文章を書くときに大切です。' },
+          { id: 11, title: 'スペースキーとエンターキー', learn: ['2つの大事なキーの働きを知る'], text: 'スペースキーは、空白を入れたり、変換候補を出したりするときに使います。エンターキーは、決定したり、次の行に進んだりするときに使います。', tryList: ['名前のあいだにスペースを入れよう', 'エンターで改行しよう'], quiz: '行を変えるときによく使うキーは？', choices: ['A. エンターキー', 'B. シフトキー', 'C. タブキー'], answer: '答え：A', summary: 'スペースとエンターは、文字入力でよく使う大事なキーです。' },
+          { id: 12, title: 'バックスペースとデリート', learn: ['文字を消す2つの方法を知る'], text: 'バックスペースは、カーソルの前の文字を消します。デリートは、カーソルの後ろの文字を消します。まずはバックスペースが使えれば十分です。', tryList: ['まちがえて入力した文字をバックスペースで消そう'], quiz: '前の文字を消すのはどれ？', choices: ['A. バックスペース', 'B. 電源', 'C. Esc'], answer: '答え：A', summary: '消すキーを覚えると、まちがえても安心です。' },
+          { id: 13, title: 'ローマ字入力の基本', learn: ['ローマ字入力の基本を知る'], text: '日本語入力では、ローマ字を使ってひらがなを出すことが多いです。例：a → あ、i → い、u → う、ka → か、ni → に、ta → た。', tryList: ['aiueo を入力しよう', 'sakura を入力してみよう'], quiz: '「た」はどう打つ？', choices: ['A. ta', 'B. to', 'C. te'], answer: '答え：A', summary: 'ローマ字入力に慣れると、文章が入力しやすくなります。' }
+        ]
+      },
+      {
+        id: 2,
+        title: 'ステップ2 画面の見方と基本操作',
+        color: '#7bd88f',
+        lessons: [
+          { id: 14, title: 'クリック・ダブルクリック・右クリック', learn: ['3つのクリックの使い分け'], text: 'クリックは選ぶ、ダブルクリックは開く、右クリックはメニューを出すときに使います。どれもマウスの大事な使い方です。', tryList: ['アイコンをクリックしよう', 'ダブルクリックで開いてみよう', '右クリックでメニューを見よう'], quiz: 'メニューを出す操作は？', choices: ['A. 右クリック', 'B. ダブルクリック', 'C. スクロール'], answer: '答え：A', summary: 'クリックの違いを知ると、操作がぐっと楽になります。' },
+          { id: 15, title: 'ドラッグ＆ドロップ', learn: ['つかんで動かす操作を覚える'], text: 'ドラッグは、マウスのボタンを押したまま動かすことです。ドロップは、動かした先でボタンをはなすことです。ファイルを移動したり、絵を動かしたりするときに使います。', tryList: ['アイコンを少し動かしてみよう', '絵をドラッグして別の場所に置いてみよう'], quiz: 'ドラッグはどんな操作？', choices: ['A. 押したまま動かす', 'B. 2回押す', 'C. 音を出す'], answer: '答え：A', summary: 'ドラッグ＆ドロップは、物を動かすような操作です。' },
+          { id: 16, title: 'ウィンドウってなに？', learn: ['ウィンドウの意味を知る'], text: 'ウィンドウは、パソコンの画面に出てくる四角い作業の場所です。メモを開いたとき、ブラウザを開いたとき、それぞれのアプリがウィンドウで表示されます。', tryList: ['メモとブラウザを開いて、2つのウィンドウを見よう'], quiz: '画面の中に出る四角い作業場所は？', choices: ['A. ウィンドウ', 'B. マウスパッド', 'C. 机'], answer: '答え：A', summary: 'ウィンドウは、アプリごとの作業スペースです。' },
+          { id: 17, title: '開く・閉じる・小さくする', learn: ['ウィンドウの基本操作を知る'], text: 'ウィンドウは開いたり、閉じたり、小さくしたりできます。「×」は閉じる、「＿」は小さくする、四角いボタンは大きさを変えることが多いです。', tryList: ['1つのアプリを開こう', '小さくしてみよう', 'もう一度開こう', '最後に閉じよう'], quiz: '閉じるボタンはどれ？', choices: ['A. ×', 'B. ○', 'C. △'], answer: '答え：A', summary: 'ウィンドウの操作を覚えると、画面を整理しやすくなります。' },
+          { id: 18, title: 'スクロールしてみよう', learn: ['画面を上下に動かして見る方法を知る'], text: '画面に全部が入りきらないときは、スクロールして続きが見られます。マウスのホイールや画面のスクロールバーを使います。', tryList: ['長いページを開いて下へスクロールしよう', '上へもどろう'], quiz: '続きを見るために画面を動かすことを何という？', choices: ['A. スクロール', 'B. シャットダウン', 'C. 保存'], answer: '答え：A', summary: 'スクロールを使うと、長いページも読めます。' },
+          { id: 19, title: 'コピー＆貼り付けの基本', learn: ['コピーとはりつけの意味を知る'], text: 'コピーは、文字や絵を同じ形でうつすことです。貼り付けは、コピーしたものを別の場所に出すことです。メモをまとめるときに便利です。', tryList: ['文章を選ぼう', 'コピーしよう', '別の場所に貼り付けよう'], quiz: 'コピーしたものを出すことを何という？', choices: ['A. 貼り付け', 'B. 電源', 'C. スクロール'], answer: '答え：A', summary: 'コピーとはりつけを覚えると、作業が速くなります。' }
+        ]
+      },
+      {
+        id: 3,
+        title: 'ステップ3 よく使うパソコン用語',
+        color: '#8cc8ff',
+        lessons: [
+          { id: 20, title: 'フォルダとは？', learn: ['フォルダの意味を知る'], text: 'フォルダは、ファイルをしまう箱のようなものです。教科ごと、学年ごと、写真ごとに分けると見つけやすくなります。', tryList: ['「べんきょう」フォルダを作ろう', 'その中に「こくご」フォルダを作ろう'], quiz: 'フォルダの役目は？', choices: ['A. 整理する', 'B. 音を出す', 'C. 画面を消す'], answer: '答え：A', summary: 'フォルダは、データを整理するための箱です。' },
+          { id: 21, title: 'ファイルとは？', learn: ['ファイルの意味を知る'], text: 'ファイルは、文章、写真、絵、音などのデータそのものです。フォルダの中にファイルをしまって整理します。', tryList: ['メモを保存して、1つのファイルを作ろう'], quiz: '文章や写真のデータのことを何という？', choices: ['A. ファイル', 'B. 机', 'C. コンセント'], answer: '答え：A', summary: 'ファイルは、パソコンの大切な中身です。' },
+          { id: 22, title: 'メモとは？', learn: ['メモアプリの役目を知る'], text: 'メモは、文字をかんたんに書くためのアプリです。自己紹介や買い物リスト、勉強メモなどを書けます。', tryList: ['「こんにちは」と書こう', '自分の好きなものを3つ書こう'], quiz: 'かんたんに文字を書くのに向いているのは？', choices: ['A. メモ', 'B. スピーカー', 'C. カメラ'], answer: '答え：A', summary: 'メモは、まず文字入力を練習するときにぴったりです。' },
+          { id: 23, title: 'ブラウザとは？', learn: ['ブラウザの役目を知る'], text: 'ブラウザは、インターネットのページを見るためのアプリです。学習サイトを見たり、調べものをしたりするときに使います。', tryList: ['ブラウザを開こう', '上の入力らんを見つけよう'], quiz: 'Webページを見るためのアプリは？', choices: ['A. ブラウザ', 'B. 電源', 'C. キーボード'], answer: '答え：A', summary: 'ブラウザは、インターネットを見る入口です。' },
+          { id: 24, title: 'インターネットとは？', learn: ['インターネットの意味を知る'], text: 'インターネットは、世界中の情報につながる大きなネットワークです。動画を見たり、調べものをしたり、遠くの人とやりとりしたりできます。', tryList: ['家の人と、どんなことに使っているか話そう'], quiz: '世界中の情報につながるしくみは？', choices: ['A. インターネット', 'B. マウスだけ', 'C. えんぴつ'], answer: '答え：A', summary: 'インターネットはとても便利ですが、安全に使うことも大切です。' },
+          { id: 25, title: '検索とは？', learn: ['検索の意味を知る'], text: '検索は、知りたいことを言葉でさがすことです。たとえば「カブトムシ 育て方」や「月の形 なぜ」など、知りたいことを短く入れると見つけやすいです。', tryList: ['好きな動物について検索する言葉を考えよう'], quiz: '知りたいことを言葉でさがすことを何という？', choices: ['A. 検索', 'B. 保存', 'C. 終了'], answer: '答え：A', summary: '検索ができると、知りたいことを自分で調べられます。' },
+          { id: 26, title: 'ダウンロードとは？', learn: ['ダウンロードの意味を知る'], text: 'ダウンロードは、インターネット上にあるデータを自分のパソコンに取りこむことです。プリントや画像を保存するときに使うことがあります。', tryList: ['大人といっしょに安全なファイルを1つ保存してみよう'], quiz: 'ネットのデータを自分のパソコンに取りこむことは？', choices: ['A. ダウンロード', 'B. スクロール', 'C. 再起動'], answer: '答え：A', summary: 'ダウンロードは便利ですが、知らないファイルは開かないように気をつけます。' },
+          { id: 27, title: 'アップロードとは？', learn: ['アップロードの意味を知る'], text: 'アップロードは、自分のパソコンにあるデータをインターネット上へ送ることです。宿題の提出や、写真を送るときに使うことがあります。', tryList: ['「送る」「提出する」という言葉とアップロードの関係を考えよう'], quiz: '自分のデータをネットへ送ることは？', choices: ['A. アップロード', 'B. シャットダウン', 'C. ダブルクリック'], answer: '答え：A', summary: 'アップロードは、ネットにデータを出すことです。' },
+          { id: 28, title: 'パスワードとは？', learn: ['パスワードの役目を知る'], text: 'パスワードは、本人だけが使えるようにするための大切な合言葉です。他の人に教えないこと、かんたんすぎるものにしないことが大切です。', tryList: ['安全なパスワードのルールを1つ言ってみよう'], quiz: 'パスワードはどうする？', choices: ['A. 友だち全員に教える', 'B. ひみつにする', 'C. 紙ひこうきにする'], answer: '答え：B', summary: 'パスワードは、自分を守る大切な情報です。' }
+        ]
+      },
+      {
+        id: 4,
+        title: 'ステップ4 ショートカットキーを覚えよう',
+        color: '#c6b4ff',
+        lessons: [
+          { id: 29, title: 'ショートカットキーってなに？', learn: ['ショートカットキーの意味を知る'], text: 'ショートカットキーは、キーボードを使ってすばやく操作する方法です。メニューを開かなくても、よく使うことがすぐできます。', tryList: ['Ctrlキーの場所を見つけよう'], quiz: 'ショートカットキーは何のため？', choices: ['A. すばやく操作するため', 'B. 机をふくため', 'C. 画面を洗うため'], answer: '答え：A', summary: 'ショートカットキーを覚えると、作業が速くなります。' },
+          { id: 30, title: 'Ctrl + C コピー', learn: ['コピーのショートカットを覚える'], text: 'Ctrl + C は、選んだ文字やデータをコピーするときに使います。元のものはそのまま残ります。', tryList: ['1行の文を選んで Ctrl + C を押そう'], quiz: 'コピーはどれ？', choices: ['A. Ctrl + C', 'B. Ctrl + V', 'C. Ctrl + Z'], answer: '答え：A', summary: 'Ctrl + C は、コピーです。' },
+          { id: 31, title: 'Ctrl + V はりつけ', learn: ['はりつけのショートカットを覚える'], text: 'Ctrl + V は、コピーしたものを別の場所にはりつけるときに使います。', tryList: ['コピーした文を別の場所にはりつけよう'], quiz: 'はりつけはどれ？', choices: ['A. Ctrl + V', 'B. Ctrl + S', 'C. Ctrl + A'], answer: '答え：A', summary: 'Ctrl + V は、はりつけです。' },
+          { id: 32, title: 'Ctrl + X 切り取り', learn: ['切り取りを知る'], text: 'Ctrl + X は、選んだものを元の場所からなくして、別の場所へ動かすための準備です。コピーとちがい、元の場所から消えます。', tryList: ['文字を切り取って、別の場所に移そう'], quiz: '元の場所からなくなるのは？', choices: ['A. 切り取り', 'B. コピー', 'C. 保存'], answer: '答え：A', summary: 'Ctrl + X は、切り取りです。' },
+          { id: 33, title: 'Ctrl + Z もとにもどす', learn: ['まちがえたときの戻し方を知る'], text: 'Ctrl + Z は、1つ前の操作をもとにもどすときに使います。まちがえたときにとても便利です。', tryList: ['文字を消してみよう', 'Ctrl + Z でもとにもどそう'], quiz: 'もとにもどすのは？', choices: ['A. Ctrl + Z', 'B. Ctrl + C', 'C. Ctrl + V'], answer: '答え：A', summary: '困ったら Ctrl + Z を思い出しましょう。' },
+          { id: 34, title: 'Ctrl + S 保存', learn: ['保存のショートカットを覚える'], text: 'Ctrl + S は、作ったものを保存するときに使います。文章や絵をなくさないために大切です。', tryList: ['メモを書いて Ctrl + S を押そう'], quiz: '保存はどれ？', choices: ['A. Ctrl + S', 'B. Ctrl + A', 'C. Ctrl + V'], answer: '答え：A', summary: '大事なものは、こまめに保存しましょう。' },
+          { id: 35, title: 'Ctrl + A 全部えらぶ', learn: ['全部選ぶ方法を知る'], text: 'Ctrl + A は、画面の中の文字などを全部えらぶときに使います。まとめてコピーしたいときに便利です。', tryList: ['文章を全部えらんでみよう'], quiz: '全部えらぶのは？', choices: ['A. Ctrl + A', 'B. Ctrl + Z', 'C. Ctrl + X'], answer: '答え：A', summary: 'Ctrl + A は、全部えらぶときに使います。' },
+          { id: 36, title: 'Alt + Tab 画面を切りかえる', learn: ['開いている画面の切り替えを知る'], text: 'Alt + Tab は、開いているアプリどうしを切りかえるときに使います。メモとブラウザを行ったり来たりしたいときに便利です。', tryList: ['メモとブラウザを開こう', 'Alt + Tab で切りかえよう'], quiz: '開いている画面を切りかえるのは？', choices: ['A. Alt + Tab', 'B. Ctrl + C', 'C. Ctrl + S'], answer: '答え：A', summary: '画面の切りかえを覚えると、作業がしやすくなります。' }
+        ]
+      },
+      {
+        id: 5,
+        title: 'ステップ5 インターネットを安全に使おう',
+        color: '#ffbf7d',
+        lessons: [
+          { id: 37, title: '正しいサイトの開き方', learn: ['安全にサイトを開く気持ちを持つ'], text: 'サイトを開くときは、知っているページや先生・家の人が教えてくれたページを使いましょう。へんな広告やあやしいボタンは押さないようにします。', tryList: ['安全そうなページとあやしいページのちがいを話そう'], quiz: 'よくわからない広告はどうする？', choices: ['A. すぐ押す', 'B. 押さない', 'C. たくさん押す'], answer: '答え：B', summary: 'サイトは、安心できるものを使うことが大切です。' },
+          { id: 38, title: '検索するときのコツ', learn: ['検索語を工夫する'], text: '検索するときは、知りたいことを短くわかりやすく入れるのがコツです。たとえば「犬」だけより、「犬 飼い方」のほうが見つけやすいことがあります。', tryList: ['「月」について調べる検索語を2つ考えよう'], quiz: '見つけやすい検索のしかたは？', choices: ['A. 短くわかりやすく入れる', 'B. 何も入れない', 'C. ひたすら同じ文字を打つ'], answer: '答え：A', summary: '検索は、言葉の選び方が大切です。' },
+          { id: 39, title: 'あぶないページに気をつけよう', learn: ['あやしいページに注意する'], text: '「すぐ押して」「当たりました」「ウイルスです」など、びっくりさせる画面が出ることがあります。そんなときは、自分で決めずに大人へ相談します。', tryList: ['どんな言葉があやしいか考えよう'], quiz: 'こわい画面が出たら？', choices: ['A. 何でも押す', 'B. 大人に相談する', 'C. そのまま友だちに送る'], answer: '答え：B', summary: 'あやしいページは、1人で判断しないことが大切です。' },
+          { id: 40, title: '本名や住所を書かない', learn: ['個人情報を守る大切さを知る'], text: 'インターネットでは、本名、住所、電話番号、学校名などを書かないことが大切です。自分を守るためのルールです。', tryList: ['書いてよいこと、書かないほうがよいことを分けよう'], quiz: 'ネットに書かないほうがよいものは？', choices: ['A. 住所', 'B. 好きな色', 'C. 好きな食べもの'], answer: '答え：A', summary: '自分の情報は大切に守りましょう。' },
+          { id: 41, title: 'パスワードを教えない', learn: ['パスワードの守り方を知る'], text: 'パスワードは、自分だけの大事なかぎです。仲のよい友だちでも、むやみに教えてはいけません。', tryList: ['なぜパスワードを教えないほうがよいか話してみよう'], quiz: 'パスワードは？', choices: ['A. みんなに教える', 'B. ひみつにする', 'C. 画面に大きく書く'], answer: '答え：B', summary: 'パスワードは、かならず大切にしましょう。' },
+          { id: 42, title: 'へんなメッセージが出たらどうする？', learn: ['困ったときの行動を知る'], text: '知らないメッセージやこわい画面が出たら、あわてないことが大切です。勝手に押さず、大人や先生に見せましょう。', tryList: ['困ったときに相談する相手を考えよう'], quiz: 'へんなメッセージが出たらまず何をする？', choices: ['A. あわてて押す', 'B. 相談する', 'C. 画面をたたく'], answer: '答え：B', summary: '困ったときは、1人で何とかしようとしないことが大切です。' },
+          { id: 43, title: 'ITリテラシーってなに？', learn: ['ITリテラシーの意味を知る'], text: 'ITリテラシーとは、パソコンやインターネットを正しく、安全に使う力のことです。ただ使えるだけでなく、考えながら使うことが大切です。', tryList: ['「安全に使うために大切なこと」を3つ考えよう'], quiz: 'ITリテラシーに入るのはどれ？', choices: ['A. 安全に使う', 'B. 正しく考える', 'C. 情報をたしかめる', 'D. ぜんぶ'], answer: '答え：D', summary: 'これからの時代は、正しく使う力もとても大切です。' }
+        ]
+      },
+      {
+        id: 6,
+        title: 'ステップ6 実際にやってみよう',
+        color: '#9fe0ff',
+        lessons: [
+          { id: 44, title: 'メモ帳で自己紹介を書こう', learn: ['文字入力と改行の練習をする'], text: 'メモ帳を使って、名前、好きな食べもの、好きな遊びなどを書いてみましょう。書くことで、文字入力に慣れることができます。', tryList: ['名前', '好きな食べもの', '好きな教科 の3つを書こう'], quiz: '文字をかんたんに書く練習に向いているのは？', choices: ['A. メモ帳', 'B. 電源ボタン', 'C. スピーカー'], answer: '答え：A', summary: 'まずは、自分のことを書くと入力練習がしやすいです。' },
+          { id: 45, title: 'フォルダを作って保存しよう', learn: ['フォルダ作成と保存を体験する'], text: '作ったメモは、そのままではなく保存すると、あとでまた見られます。自分のフォルダを作って、その中にしまってみましょう。', tryList: ['「わたしのべんきょう」フォルダを作ろう', '自己紹介メモをその中に保存しよう'], quiz: '作ったものをのこすことを何という？', choices: ['A. 保存', 'B. 終了', 'C. 削除'], answer: '答え：A', summary: '作ったものは、フォルダに分けて保存すると見つけやすいです。' },
+          { id: 46, title: '画像を開いてみよう', learn: ['画像ファイルを見る体験をする'], text: 'パソコンでは、写真や絵もファイルとして開けます。ダブルクリックすると開けることが多いです。', tryList: ['1枚の画像を開こう', '閉じて、もう一度開こう'], quiz: '画像も何の一種？', choices: ['A. ファイル', 'B. 机', 'C. コードだけ'], answer: '答え：A', summary: '文章だけでなく、画像もファイルとしてあつかいます。' },
+          { id: 47, title: '検索して調べものをしよう', learn: ['検索を使って情報をさがす'], text: '知りたいことを検索すると、自分で調べられるようになります。でも、出てきた情報が本当かどうかは、大人といっしょにたしかめることも大切です。', tryList: ['「アリ たべもの」など、身近なことで検索してみよう'], quiz: '検索のあとに大切なことは？', choices: ['A. 何でも信じる', 'B. たしかめる', 'C. すぐ消す'], answer: '答え：B', summary: '調べものは、検索とたしかめる力の両方が大切です。' },
+          { id: 48, title: 'コピーしてまとめよう', learn: ['必要な情報をまとめる練習をする'], text: '調べたことをそのまま全部うつすだけではなく、大事なところを選んでまとめることが大切です。コピーは便利ですが、読みやすく整理することも大事です。', tryList: ['調べたことを2文だけメモにまとめよう'], quiz: 'コピーしたあとに大切なことは？', choices: ['A. 整理する', 'B. そのまま放置する', 'C. 全部消す'], answer: '答え：A', summary: 'コピーは便利ですが、まとめる力も大切です。' },
+          { id: 49, title: 'かんたんな発表ページを作ろう', learn: ['学んだことを使ってまとめる'], text: '最後は、自分の好きなものについて、タイトルと文章を入れたかんたんな発表ページを作ります。文字入力、保存、コピー、検索など、いままでの学びを使って作れます。', tryList: ['テーマを1つ決めよう', 'タイトルを書く', '3つの説明を書く', '保存する'], quiz: '発表ページ作りで使う力は？', choices: ['A. 文字入力', 'B. 保存', 'C. まとめる力', 'D. ぜんぶ'], answer: '答え：D', summary: '自分で作ると、できることがぐっと増えたと実感できます。' }
+        ]
+      }
+    ];
+
+    const allLessons = steps.flatMap(step => step.lessons.map(lesson => ({ ...lesson, stepId: step.id, stepTitle: step.title })));
+    let currentView = 'home';
+    let currentLessonId = Number(localStorage.getItem('pcSchoolCurrentLesson') || 1);
+    let progress = JSON.parse(localStorage.getItem('pcSchoolProgress') || '[]');
+
+    function saveState() {
+      localStorage.setItem('pcSchoolCurrentLesson', String(currentLessonId));
+      localStorage.setItem('pcSchoolProgress', JSON.stringify(progress));
+    }
+
+    function markDone(id) {
+      if (!progress.includes(id)) progress.push(id);
+      saveState();
+      renderSidebar();
+      updateProgress();
+    }
+
+    function resetProgress() {
+      progress = [];
+      currentLessonId = 1;
+      saveState();
+      renderSidebar();
+      updateProgress();
+      showHome();
+    }
+
+    function getLessonById(id) {
+      return allLessons.find(item => item.id === id);
+    }
+
+    function updateProgress() {
+      const total = allLessons.length;
+      const done = progress.length;
+      document.getElementById('progressText').textContent = `${done} / ${total} ページ`;
+      document.getElementById('progressFill').style.width = `${(done / total) * 100}%`;
+    }
+
+    function renderSidebar() {
+      const el = document.getElementById('stepList');
+      el.innerHTML = steps.map(step => {
+        const lessonsHtml = step.lessons.map(lesson => {
+          const done = progress.includes(lesson.id);
+          return `
+            <button class="lesson-btn ${done ? 'done' : ''}" onclick="openLesson(${lesson.id})">
+              <span>${lesson.id}. ${lesson.title}</span>
+              <span class="badge">${done ? '✓' : 'GO'}</span>
+            </button>
+          `;
+        }).join('');
+
+        return `
+          <div class="step-card">
+            <div class="step-title">${step.title}</div>
+            <div class="lesson-list">${lessonsHtml}</div>
+          </div>
+        `;
+      }).join('');
+    }
+
+    function setActiveTab(view) {
+      ['home', 'steps', 'lesson', 'parent'].forEach(name => {
+        document.getElementById(`tab-${name}`).classList.toggle('active', name === view);
+      });
+    }
+
+    function showHome() {
+      currentView = 'home';
+      setActiveTab('home');
+      const done = progress.length;
+      document.getElementById('content').innerHTML = `
+        <div class="welcome-grid">
+          <section class="mini-card">
+            <h2>ようこそ</h2>
+            <p>このサイトでは、パソコンのひらき方、マウスの使い方、キーボード入力、フォルダ、ブラウザ、ショートカットキー、インターネットの安全な使い方まで、順番に学べます。</p>
+            <p>はじめてでも大丈夫です。1ページずつ進めると、少しずつできることが増えていきます。</p>
+            <div class="button-row">
+              <button class="primary" onclick="openFirstLesson()">レッスンをはじめる</button>
+              <button class="secondary" onclick="showStepList()">ステップを見る</button>
+            </div>
+          </section>
+          <section class="mini-card">
+            <h2>いまできたこと</h2>
+            <p><strong>${done}</strong> ページ学習しました。</p>
+            <p>できたページは左の一覧で ✓ がつきます。</p>
+            <p>つづきから始めたいときは、学習ページボタンを押してください。</p>
+          </section>
+        </div>
+
+        <section class="section-box">
+          <h3>このサイトで学べること</h3>
+          <div class="cards-grid">
+            <div class="mini-card"><strong>パソコンの基本</strong><p>電源、マウス、キーボードの使い方を学びます。</p></div>
+            <div class="mini-card"><strong>文字入力</strong><p>ひらがな、カタカナ、漢字変換、ローマ字入力を学びます。</p></div>
+            <div class="mini-card"><strong>パソコン用語</strong><p>フォルダ、ファイル、ブラウザ、インターネットの意味がわかります。</p></div>
+            <div class="mini-card"><strong>安全な使い方</strong><p>個人情報、パスワード、あやしいページへの注意を学びます。</p></div>
+          </div>
+        </section>
+      `;
+    }
+
+    function showStepList() {
+      currentView = 'steps';
+      setActiveTab('steps');
+      document.getElementById('content').innerHTML = `
+        <h2>ステップ一覧</h2>
+        <p>学びたいところから進めても、上から順番に進めても大丈夫です。</p>
+        <div class="cards-grid">
+          ${steps.map(step => `
+            <section class="mini-card">
+              <h3>${step.title}</h3>
+              <p>レッスン数：${step.lessons.length}ページ</p>
+              <button class="primary" onclick="openLesson(${step.lessons[0].id})">このステップをはじめる</button>
+            </section>
+          `).join('')}
+        </div>
+      `;
+    }
+
+    function showCurrentLesson() {
+      openLesson(currentLessonId);
+    }
+
+    function openFirstLesson() {
+      openLesson(1);
+    }
+
+    function showParentPage() {
+      currentView = 'parent';
+      setActiveTab('parent');
+      document.getElementById('content').innerHTML = `
+        <h2>保護者向けページ</h2>
+        <div class="section-box">
+          <p>このサイトは、小学生がパソコンの基本を無理なく学べるように作られています。</p>
+          <p>文字入力やファイル保存といった操作だけでなく、インターネットの安全な使い方や個人情報を守る意識も育てる構成です。</p>
+        </div>
+        <div class="section-box">
+          <h3>家庭での見守りポイント</h3>
+          <ul>
+            <li>わからないときはすぐ相談する</li>
+            <li>パスワードを勝手に教えない</li>
+            <li>あやしい画面は1人で触らない</li>
+            <li>長時間使いすぎないように休けいを入れる</li>
+          </ul>
+        </div>
+        <div class="section-box">
+          <h3>おすすめの使い方</h3>
+          <ul>
+            <li>1日1〜2ページずつ進める</li>
+            <li>学んだ内容を実際のパソコンで試す</li>
+            <li>クイズの答えを親子で話す</li>
+          </ul>
+        </div>
+      `;
+    }
+
+    function openLesson(id) {
+      currentLessonId = id;
+      saveState();
+      currentView = 'lesson';
+      setActiveTab('lesson');
+      const lesson = getLessonById(id);
+      const index = allLessons.findIndex(item => item.id === id);
+      const prev = allLessons[index - 1];
+      const next = allLessons[index + 1];
+      const done = progress.includes(id);
+
+      document.getElementById('content').innerHTML = `
+        <div class="lesson-head">
+          <div>
+            <span class="pill">${lesson.stepTitle}</span>
+            <h2>${lesson.id}. ${lesson.title}</h2>
+          </div>
+          <div class="button-row">
+            <button class="primary" onclick="completeLesson(${lesson.id})">${done ? '学習ずみです' : 'できた！'}</button>
+          </div>
+        </div>
+
+        <div class="section-box">
+          <h3>このページで学ぶこと</h3>
+          <ul>${lesson.learn.map(item => `<li>${item}</li>`).join('')}</ul>
+        </div>
+
+        <div class="section-box">
+          <h3>やさしい説明</h3>
+          <p>${lesson.text}</p>
+        </div>
+
+        <div class="section-box">
+          <h3>やってみよう</h3>
+          <ul>${lesson.tryList.map(item => `<li>${item}</li>`).join('')}</ul>
+        </div>
+
+        <div class="quiz-box">
+          <h3>ミニクイズ</h3>
+          <p><strong>${lesson.quiz}</strong></p>
+          <ul>${lesson.choices.map(item => `<li>${item}</li>`).join('')}</ul>
+          <button class="secondary" onclick="toggleAnswer()">答えを見る</button>
+          <div class="quiz-answer" id="quizAnswer">${lesson.answer}</div>
+        </div>
+
+        <div class="section-box">
+          <h3>まとめ</h3>
+          <p>${lesson.summary}</p>
+        </div>
+
+        <div class="nav-bottom">
+          <button class="secondary" ${prev ? `onclick="openLesson(${prev.id})"` : 'disabled'}>← 前のページ</button>
+          <button class="primary" onclick="completeAndNext(${lesson.id})">できた！つぎへ →</button>
+          <button class="secondary" ${next ? `onclick="openLesson(${next.id})"` : 'disabled'}>つぎのページだけ見る →</button>
+        </div>
+
+        <p class="footer-note">※ 「できた！」を押すと進みぐあいに反映されます。</p>
+      `;
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleAnswer() {
+      const el = document.getElementById('quizAnswer');
+      if (el) el.classList.toggle('show');
+    }
+
+    function completeLesson(id) {
+      markDone(id);
+      openLesson(id);
+    }
+
+    function completeAndNext(id) {
+      markDone(id);
+      const index = allLessons.findIndex(item => item.id === id);
+      const next = allLessons[index + 1];
+      if (next) openLesson(next.id);
+      else showHome();
+    }
+
+    renderSidebar();
+    updateProgress();
+    showHome();
+  </script>
+</body>
+</html>
