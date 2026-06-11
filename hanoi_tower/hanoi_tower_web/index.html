@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ハノイの塔</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="app">
+    <section class="hero">
+      <div>
+        <p class="eyebrow">Tower of Hanoi</p>
+        <h1>ハノイの塔</h1>
+        <p class="lead">円盤を1枚ずつ動かして、すべて右の塔へ移動しよう。</p>
+      </div>
+      <div class="status-card">
+        <div>
+          <span>手数</span>
+          <strong id="moveCount">0</strong>
+        </div>
+        <div>
+          <span>最短</span>
+          <strong id="minMoves">7</strong>
+        </div>
+      </div>
+    </section>
+
+    <section class="controls" aria-label="ゲーム設定">
+      <label>
+        円盤数
+        <select id="diskSelect">
+          <option value="3">3枚</option>
+          <option value="4">4枚</option>
+          <option value="5">5枚</option>
+          <option value="6">6枚</option>
+          <option value="7">7枚</option>
+        </select>
+      </label>
+      <button id="resetBtn" type="button">リセット</button>
+      <button id="hintBtn" type="button">ヒント</button>
+      <button id="autoBtn" type="button">自動解答</button>
+    </section>
+
+    <section class="message" id="message">円盤をクリックして、移動先の塔を選んでください。</section>
+
+    <section class="board" id="board" aria-label="ハノイの塔ゲーム盤">
+      <div class="tower" data-tower="0" role="button" tabindex="0" aria-label="左の塔">
+        <div class="peg"></div>
+        <div class="base"></div>
+      </div>
+      <div class="tower" data-tower="1" role="button" tabindex="0" aria-label="中央の塔">
+        <div class="peg"></div>
+        <div class="base"></div>
+      </div>
+      <div class="tower" data-tower="2" role="button" tabindex="0" aria-label="右の塔">
+        <div class="peg"></div>
+        <div class="base"></div>
+      </div>
+    </section>
+
+    <section class="rules">
+      <h2>ルール</h2>
+      <ul>
+        <li>一度に動かせる円盤は1枚だけ。</li>
+        <li>小さい円盤の上に大きい円盤は置けない。</li>
+        <li>すべての円盤を右の塔へ移動できたらクリア。</li>
+      </ul>
+    </section>
+  </main>
+
+  <div class="modal" id="clearModal" hidden>
+    <div class="modal-content">
+      <h2>クリア！</h2>
+      <p id="clearText"></p>
+      <button id="closeModalBtn" type="button">閉じる</button>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
