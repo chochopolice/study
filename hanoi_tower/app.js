@@ -29,6 +29,7 @@ function initGame() {
   autoRunning = false;
   autoBtn.disabled = false;
   diskSelect.disabled = false;
+  clearModal.hidden = true;
   setMessage('円盤をクリックして、移動先の塔を選んでください。');
   updateStats();
   render();
