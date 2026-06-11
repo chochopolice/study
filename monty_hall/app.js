@@ -148,6 +148,10 @@ function speakGameIntro() {
   );
 }
 
+function speakSwitchPrompt() {
+  speak('選択を変えますか？');
+}
+
 function updateProbability() {
   state.doorCount = clampDoorCount(doorCountNumber.value);
   if (state.doorCount <= 30) doorCountRange.value = state.doorCount;
@@ -270,6 +274,7 @@ function chooseFirstDoor(doorNumber) {
   remainingText.textContent = state.remainingDoors.map(n => `${n}番`).join(' / ');
   stepText.textContent = '変更するか選択中';
   message.textContent = `あなたは${state.firstChoice}番を選びました。主催者がハズレのドアを開け、残りは ${state.remainingDoors.join('番・')}番 です。選択を変えるか決めてください。`;
+  speakSwitchPrompt();
   switchPanel.classList.remove('hidden');
   resultPanel.classList.add('hidden');
   renderDoors();
