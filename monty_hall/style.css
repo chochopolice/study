@@ -250,6 +250,26 @@ button:disabled {
   box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.18);
 }
 
+.door.switch-candidate {
+  outline: 3px solid rgba(255, 255, 255, 0.28);
+  outline-offset: 3px;
+}
+
+.door.switch-candidate::after {
+  content: "選択OK";
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  color: #e0f2fe;
+  background: rgba(14, 116, 144, 0.72);
+  border-radius: 999px;
+  padding: 4px 8px;
+  font-size: 0.75rem;
+}
+
+.door.selected.switch-candidate::after {
+  content: "維持";
+}
 .door.final-selected {
   border-color: var(--accent2);
   box-shadow: 0 0 0 4px rgba(249, 115, 22, 0.2);
