@@ -305,7 +305,7 @@ function chooseFirstDoor(doorNumber) {
   remainingText.textContent = state.remainingDoors.map(n => `${n}番`).join(' / ');
   stepText.textContent = '変更するか選択中';
   message.textContent = `あなたは${state.firstChoice}番を選びました。主催者がハズレのドアを開け、残りは ${state.remainingDoors.join('番・')}番 です。選択を変えるか決めてください。残ったドアのイラストをクリックして最終選択できます。`;
-  speakSwitchPrompt();  speakSwitchPrompt();
+  speakSwitchPrompt();
   switchPanel.classList.remove('hidden');
   resultPanel.classList.add('hidden');
   renderDoors();
@@ -319,7 +319,7 @@ function stay() {
 function chooseFinalDoor(doorNumber) {
   state.finalChoice = doorNumber;
   message.textContent = `変更する場合は、${switchCandidates.join('番・')}番 のドアイラストをクリックしてください。`;
-
+}
 function finishGame(switched) {
   state.phase = 'finished';
   const isWin = state.finalChoice === state.prizeDoor;
