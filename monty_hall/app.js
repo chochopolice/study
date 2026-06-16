@@ -271,7 +271,7 @@ function handleDoorClick(doorNumber) {
   }
 
   chooseFinalDoor(doorNumber);
-
+}
 
 function chooseFirstDoor(doorNumber) {
   playDoorSelectionBgm();
@@ -316,10 +316,19 @@ function stay() {
   state.finalChoice = state.firstChoice;
   finishGame(false);
 }
-function chooseFinalDoor(doorNumber) {
-  state.finalChoice = doorNumber;
-  message.textContent = `変更する場合は、${switchCandidates.join('番・')}番 のドアイラストをクリックしてください。`;
+function switchDoor() {
+  if (state.phase !== 'switching') return;
+  const switchCandidates = state.remainingDoors.filter(door => door !== state.firstChoice);
+  if (switchCandidates.length === 0) return;
+  chooseFinalDoor(switchCandidates[Math.floor(Math.random() * switchCandidates.length)]);
 }
+
+function chooseFinalDoor(doorNumber) {
+  if (state.phase !== 'switching' || !state.remainingDoors.includes(doorNumber)) return;
+  state.finalChoice = doorNumber;
+  finishGame(doorNumber !== state.firstChoice);
+}
+
 function finishGame(switched) {
   state.phase = 'finished';
   const isWin = state.finalChoice === state.prizeDoor;
